@@ -39,10 +39,10 @@ function calcularDesvioPadrao(array, comMedia) {
 function calcularIntervaloDeConfianca(valorConfianca, array) {
   const mediaAmostra = calcularMedia(array)
   const desvioPadrao = calcularDesvioPadrao(array, mediaAmostra)
-  const em = desvioPadrao/(Math.sqrt(array.length))
+  const erroPadrao = desvioPadrao/(Math.sqrt(array.length))
 
-  const limiteInferior = mediaAmostra - (em * valorConfianca)
-  const limiteSuperior = mediaAmostra + (em * valorConfianca)
+  const limiteInferior = mediaAmostra - (erroPadrao * valorConfianca)
+  const limiteSuperior = mediaAmostra + (erroPadrao * valorConfianca)
 
   return { limiteInferior, limiteSuperior }
 }
