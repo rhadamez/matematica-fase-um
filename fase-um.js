@@ -1,37 +1,5 @@
 import { converterParaReais } from './utils.js'
-
-const precos = [
-  61990,
-  65990,
-  60360,
-  64990,
-  64900,
-  62900,
-  64900,
-  62000,
-  61900,
-  61890,
-]
-
-const kms = [
-  25000,
-  31000,
-  42207,
-  19000,
-  37269,
-  15750,
-  18250,
-  43082,
-  58564,
-  25241,
-]
-
-const amostra = [
-  53, 50, 25, 41, 32,
-  40, 67, 44, 51 ,46,
-  43, 79, 18, 73, 50
-]
-
+import { kms, precos } from './tabelas.js'
 
 function calcularTotal(array) {
   return array.reduce((acumulator, current) => acumulator+current, 0)
