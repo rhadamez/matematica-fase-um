@@ -1,5 +1,5 @@
-import { imprimir } from './utils.js'
-import { kms, precos, amostraAula } from './tabelas.js'
+import { imprimir, imprimirIntervaloConfianca } from './utils.js'
+import { kms, precos } from './tabelas.js'
 
 function calcularTotal(array) {
   return array.reduce((acumulator, current) => acumulator+current, 0)
@@ -22,9 +22,8 @@ function calcularDiferencaAoQuadrado(array, media) {
   return total
 }
 
-function calcularDesvioPadrao(array, tipoValor, comMedia) {
+function calcularDesvioPadrao(array, comMedia) {
   const media = comMedia ?? calcularMedia(array)
-  imprimir(media, 'Média', tipoValor)
 
   let total = 0
   const diferencaAoQuadrado = calcularDiferencaAoQuadrado(array, media)
@@ -34,34 +33,38 @@ function calcularDesvioPadrao(array, tipoValor, comMedia) {
 
   const desvioPadrao = Math.sqrt(variancia);
 
-  imprimir(desvioPadrao, 'Desvio padrão', tipoValor)
   return desvioPadrao
 }
 
 function calcularIntervaloDeConfianca(valorConfianca, array) {
   const mediaAmostra = calcularMedia(array)
-  const desvioPadrao = calcularDesvioPadrao(array, 'decimal', mediaAmostra)
+  const desvioPadrao = calcularDesvioPadrao(array, mediaAmostra)
   const em = desvioPadrao/(Math.sqrt(array.length))
 
   const limiteInferior = mediaAmostra - (em * valorConfianca)
   const limiteSuperior = mediaAmostra + (em * valorConfianca)
-  console.log('I.C com confiança de '+valorConfianca+': ['+limiteInferior.toFixed(2)+';'+limiteSuperior.toFixed(2)+']')
+
+  return { limiteInferior, limiteSuperior }
 }
 
 console.log('------------------')
 console.log('------Preço-------')
 console.log('------------------')
-
-calcularDesvioPadrao(precos, 'reais')
+const mediaPreco = calcularMedia(precos)
+const desvioPadraoPreco = calcularDesvioPadrao(precos)
+const valorConfianca = 1.960
+const intervalos = calcularIntervaloDeConfianca(valorConfianca, precos)
+imprimir(mediaPreco, 'Média', 'reais')
+imprimir(desvioPadraoPreco, 'Desvio padrão', 'reais')
+imprimirIntervaloConfianca(valorConfianca, intervalos, 'reais')
 
 console.log('-----------------')
 console.log('--Quilometragem--')
 console.log('-----------------')
-
-calcularDesvioPadrao(kms, 'decimal')
-
-console.log('-----------------')
-console.log('--Amostra aula--')
-console.log('-----------------')
-
-calcularIntervaloDeConfianca(1.960, amostraAula)
+const mediaKm = calcularMedia(kms)
+const desvioPadraoKm = calcularDesvioPadrao(kms)
+const valorConfiancaKm = 1.960
+const intervalosKm = calcularIntervaloDeConfianca(valorConfiancaKm, kms)
+imprimir(mediaKm, 'Média', 'decimal')
+imprimir(desvioPadraoKm, 'Desvio padrão', 'decimal')
+imprimirIntervaloConfianca(valorConfiancaKm, intervalosKm, 'decimal')
