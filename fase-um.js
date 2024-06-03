@@ -36,8 +36,8 @@ function calcularDesvioPadrao(array, comMedia) {
   return desvioPadrao
 }
 
-function calcularIntervaloDeConfianca(valorConfianca, array) {
-  const mediaAmostra = calcularMedia(array)
+function calcularIntervaloDeConfianca(valorConfianca, array, comMedia) {
+  const mediaAmostra = comMedia ? comMedia : calcularMedia(array)
   const desvioPadrao = calcularDesvioPadrao(array, mediaAmostra)
   const erroPadrao = desvioPadrao/(Math.sqrt(array.length))
 
@@ -46,6 +46,8 @@ function calcularIntervaloDeConfianca(valorConfianca, array) {
 
   return { limiteInferior, limiteSuperior }
 }
+
+//Dados sobre o preço
 
 console.log('------------------')
 console.log('------Preço-------')
@@ -58,6 +60,8 @@ imprimir(mediaPreco, 'Média', 'reais')
 imprimir(desvioPadraoPreco, 'Desvio padrão', 'reais')
 imprimirIntervaloConfianca(valorConfianca, intervalos, 'reais')
 
+//Dados sobre a quilometragem
+
 console.log('-----------------')
 console.log('--Quilometragem--')
 console.log('-----------------')
@@ -68,3 +72,18 @@ const intervalosKm = calcularIntervaloDeConfianca(valorConfiancaKm, kms)
 imprimir(mediaKm, 'Média', 'decimal')
 imprimir(desvioPadraoKm, 'Desvio padrão', 'decimal')
 imprimirIntervaloConfianca(valorConfiancaKm, intervalosKm, 'decimal')
+
+//Dados sobre a questão C:
+
+console.log('------------------------------------------------------------------------------')
+console.log('------Intervalo de confiança para a média do valor da fipe (questão C)--------')
+console.log('------------------------------------------------------------------------------')
+
+const mediaPrecoC = 56662
+
+const desvioPadraoPrecoC = calcularDesvioPadrao(precos, mediaPrecoC) // calculando o desvio padrão com uma média "forçada"
+const valorConfiancaC = 1.960
+const intervalosC = calcularIntervaloDeConfianca(valorConfiancaC, precos, mediaPrecoC)
+imprimir(mediaPrecoC, 'Média', 'reais')
+imprimir(desvioPadraoPrecoC, 'Desvio padrão', 'reais')
+imprimirIntervaloConfianca(valorConfiancaC, intervalosC, 'reais')
