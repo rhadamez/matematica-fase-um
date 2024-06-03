@@ -24,4 +24,11 @@ const kms = [
   25241,
 ]
 
-export { precos, kms }
+//valores retirados da aula 6 parte 3
+const amostraAula = [
+  53, 50, 25, 41, 32,
+  40, 67, 44, 51 ,46,
+  43, 79, 18, 73, 50
+]
+
+export { precos, kms, amostraAula }

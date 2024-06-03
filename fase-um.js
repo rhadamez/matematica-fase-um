@@ -1,5 +1,5 @@
 import { imprimir } from './utils.js'
-import { kms, precos } from './tabelas.js'
+import { kms, precos, amostraAula } from './tabelas.js'
 
 function calcularTotal(array) {
   return array.reduce((acumulator, current) => acumulator+current, 0)
@@ -38,6 +38,16 @@ function calcularDesvioPadrao(array, tipoValor, comMedia) {
   return desvioPadrao
 }
 
+function calcularIntervaloDeConfianca(valorConfianca, array) {
+  const mediaAmostra = calcularMedia(array)
+  const desvioPadrao = calcularDesvioPadrao(array, 'decimal', mediaAmostra)
+  const em = desvioPadrao/(Math.sqrt(array.length))
+
+  const limiteInferior = mediaAmostra - (em * valorConfianca)
+  const limiteSuperior = mediaAmostra + (em * valorConfianca)
+  console.log('I.C com confiança de '+valorConfianca+': ['+limiteInferior.toFixed(2)+';'+limiteSuperior.toFixed(2)+']')
+}
+
 console.log('------------------')
 console.log('------Preço-------')
 console.log('------------------')
@@ -50,3 +60,8 @@ console.log('-----------------')
 
 calcularDesvioPadrao(kms, 'decimal')
 
+console.log('-----------------')
+console.log('--Amostra aula--')
+console.log('-----------------')
+
+calcularIntervaloDeConfianca(1.960, amostraAula)
