@@ -1,3 +1,6 @@
+//carro escolhido: KWID OUTSIDER 1.0 Flex 12V 5p Mec.
+
+// valores de preços retirados da planilha 
 const precos = [
   61990,
   65990,
@@ -11,6 +14,7 @@ const precos = [
   61890,
 ]
 
+// valores de quilometros retirados da planilha
 const kms = [
   25000,
   31000,
@@ -24,7 +28,7 @@ const kms = [
   25241,
 ]
 
-//valores retirados da aula 6 parte 3
+//valores retirados da aula 6 parte 3 para teste (resultados devem ser os mesmos da aula, esta é a prova real)
 const amostraAula = [
   53, 50, 25, 41, 32,
   40, 67, 44, 51 ,46,
