@@ -1,3 +1,5 @@
+import { converterParaReais } from './utils.js'
+
 const precos = [
   61990,
   65990,
@@ -30,6 +32,7 @@ const amostra = [
   43, 79, 18, 73, 50
 ]
 
+
 function calcularTotal(array) {
   return array.reduce((acumulator, current) => acumulator+current, 0)
 }
@@ -37,8 +40,8 @@ function calcularTotal(array) {
 function calcularMedia(array) {
   const total = calcularTotal(array)
   const media = total/array.length
-  console.log('Total --> ' + total)
-  console.log('Média --> ' + media.toFixed(2))
+  console.log('Total: ' + converterParaReais(total))
+  console.log('Média: ' + converterParaReais(media))
   return media
 }
 
@@ -52,7 +55,6 @@ function calcularDiferencaAoQuadrado(array, media) {
     total = total + diferencaQuadrado
   });
 
-  console.log('Diferença ao quadrado --> ' + total.toFixed(2))
   return total
 }
 
@@ -64,8 +66,19 @@ function calcularDesvioPadrao(array, comMedia) {
   const variancia = total / (array.length - 1)
 
   const desvioPadrao = Math.sqrt(variancia);
-  console.log('Desvio padrão --> '+ desvioPadrao.toFixed(2))
+  console.log('Desvio padrão: R$ '+ converterParaReais(desvioPadrao))
   return desvioPadrao
 }
 
-calcularDesvioPadrao(amostra)
+console.log('------------------')
+console.log('------Preço-------')
+console.log('------------------')
+
+calcularDesvioPadrao(precos)
+
+console.log('-----------------')
+console.log('--Quilometragem--')
+console.log('-----------------')
+
+calcularDesvioPadrao(kms)
+
