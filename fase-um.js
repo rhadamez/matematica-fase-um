@@ -1,4 +1,4 @@
-import { converterParaReais } from './utils.js'
+import { imprimir } from './utils.js'
 import { kms, precos } from './tabelas.js'
 
 function calcularTotal(array) {
@@ -8,17 +8,13 @@ function calcularTotal(array) {
 function calcularMedia(array) {
   const total = calcularTotal(array)
   const media = total/array.length
-  console.log('Total: ' + converterParaReais(total))
-  console.log('Média: ' + converterParaReais(media))
   return media
 }
 
 function calcularDiferencaAoQuadrado(array, media) {
-  const valorMedia = media ? media : calcularMedia(array)
-
   let total = 0
   array.map(i => {
-    const diferenca = Math.abs(i - valorMedia);
+    const diferenca = Math.abs(i - media);
     const diferencaQuadrado = diferenca * diferenca;
     total = total + diferencaQuadrado
   });
@@ -26,15 +22,19 @@ function calcularDiferencaAoQuadrado(array, media) {
   return total
 }
 
-function calcularDesvioPadrao(array, comMedia) {
+function calcularDesvioPadrao(array, tipoValor, comMedia) {
+  const media = comMedia ?? calcularMedia(array)
+  imprimir(media, 'Média', tipoValor)
+
   let total = 0
-  const diferencaAoQuadrado = calcularDiferencaAoQuadrado(array, comMedia)
+  const diferencaAoQuadrado = calcularDiferencaAoQuadrado(array, media)
   total = total + diferencaAoQuadrado
 
   const variancia = total / (array.length - 1)
 
   const desvioPadrao = Math.sqrt(variancia);
-  console.log('Desvio padrão: R$ '+ converterParaReais(desvioPadrao))
+
+  imprimir(desvioPadrao, 'Desvio padrão', tipoValor)
   return desvioPadrao
 }
 
@@ -42,11 +42,11 @@ console.log('------------------')
 console.log('------Preço-------')
 console.log('------------------')
 
-calcularDesvioPadrao(precos)
+calcularDesvioPadrao(precos, 'reais')
 
 console.log('-----------------')
 console.log('--Quilometragem--')
 console.log('-----------------')
 
-calcularDesvioPadrao(kms)
+calcularDesvioPadrao(kms, 'decimal')
 
