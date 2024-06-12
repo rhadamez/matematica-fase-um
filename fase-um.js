@@ -1,5 +1,5 @@
 import { imprimir, imprimirIntervaloConfianca } from './utils.js'
-import { kms, precos } from './tabelas.js'
+import { kms, precos, amostraAula } from './tabelas.js'
 
 function calcularTotal(array) {
   return array.reduce((acumulator, current) => acumulator+current, 0)
@@ -54,7 +54,7 @@ console.log('------Preço-------')
 console.log('------------------')
 const mediaPreco = calcularMedia(precos)
 const desvioPadraoPreco = calcularDesvioPadrao(precos)
-const valorConfianca = 1.960
+const valorConfianca = 2.262
 const intervalos = calcularIntervaloDeConfianca(valorConfianca, precos)
 imprimir(mediaPreco, 'Média', 'reais')
 imprimir(desvioPadraoPreco, 'Desvio padrão', 'reais')
@@ -67,7 +67,7 @@ console.log('--Quilometragem--')
 console.log('-----------------')
 const mediaKm = calcularMedia(kms)
 const desvioPadraoKm = calcularDesvioPadrao(kms)
-const valorConfiancaKm = 1.960
+const valorConfiancaKm = 2.262
 const intervalosKm = calcularIntervaloDeConfianca(valorConfiancaKm, kms)
 imprimir(mediaKm, 'Média', 'decimal')
 imprimir(desvioPadraoKm, 'Desvio padrão', 'decimal')
@@ -82,7 +82,7 @@ console.log('-------------------------------------------------------------------
 const mediaPrecoC = 56662
 
 const desvioPadraoPrecoC = calcularDesvioPadrao(precos, mediaPrecoC) // calculando o desvio padrão com uma média "forçada"
-const valorConfiancaC = 1.960
+const valorConfiancaC = 2.262
 const intervalosC = calcularIntervaloDeConfianca(valorConfiancaC, precos, mediaPrecoC)
 imprimir(mediaPrecoC, 'Média', 'reais')
 imprimir(desvioPadraoPrecoC, 'Desvio padrão', 'reais')
